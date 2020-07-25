@@ -1,6 +1,6 @@
 # Inspo(ration)
 
-<center><img src='./assets/images/readme.png' width='500'></img></center>
+<img src='./assets/images/readme.png' width='500'></img>
 
 # What is this?
 
