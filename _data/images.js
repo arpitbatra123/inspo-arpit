@@ -1,7 +1,6 @@
 const fs = require('fs'),
   path = require('path'),
-  util = require('util');
-const { resolve } = require('path');
+  IMAGE_EXTENSIONS = ['jpeg', 'jpg', 'png'];
 
 module.exports = function getImages() {
   return new Promise((resolve, reject) => {
@@ -9,6 +8,12 @@ module.exports = function getImages() {
       if (err) {
         return reject(err);
       }
+
+      files = files.filter((file) => {
+        const extension = file.split('.')[1];
+        return IMAGE_EXTENSIONS.includes(extension);
+      });
+
       return resolve(files);
     });
   });
