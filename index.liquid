@@ -35,8 +35,10 @@
   <body>
     <main class="container">
       <ul class="grid">
-        {% for image in images reversed %}
-        <li class="item">
+        {% for imageData in images reversed %} 
+        {% assign image = imageData.image %}
+        {% assign backgroundColor = imageData.background %}
+        <li class="item" style="background-color: {{ backgroundColor }};">
           <!-- Empty image alts until i can find a better way to caption them -->
           <a href="./inspo/{{ image }}.png" data-fancybox="inspo">
             <picture>
