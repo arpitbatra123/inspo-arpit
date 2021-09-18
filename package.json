@@ -7,9 +7,9 @@
     "colorthief": "^2.3.2",
     "concurrently": "^6.2.1",
     "cwebp": "^2.0.5",
-    "sass": "^1.41.1"
+    "sass": "^1.41.1",
+    "@11ty/eleventy-plugin-rss": "^1.1.1"
   },
-  "devDependencies": {},
   "scripts": {
     "build": "eleventy && npm run sass",
     "serve": "npm run clean && concurrently 'eleventy --serve' 'npm run sass:watch'",

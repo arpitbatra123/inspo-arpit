@@ -1,0 +1,50 @@
+---json
+{
+  "permalink": "feed.xml",
+  "eleventyExcludeFromCollections": true,
+  "metadata": {
+    "title": "inspo by @arpitbatra123",
+    "subtitle": "a collection of inspirational screenshots",
+    "url": "https://inspo-arpit.vercel.app",
+    "feedUrl": "https://inspo-arpit.vercel.app/feed.xml",
+    "author": {
+      "name": "arpit batra",
+      "email": "arpitbatra123@gmail.com"
+    }
+  }
+}
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <link href="{{ metadata.feedUrl }}" rel="self" type="application/atom+xml" />
+  <link href="{{ metadata.url }}" rel="alternate" type="text/html" />
+  <updated>{{ 'now' | date: '%Y-%m-%d %H:%M' }}</updated>
+  <id>{{ metadata.url }}</id>
+  <title type="html">{{ metadata.title }}</title>
+  <subtitle>{{ metadata.subtitle }}</subtitle>
+  <author>
+    <name>{{ metadata.author.name }}</name>
+    <email>{{ metadata.author.email }}</email>
+  </author>
+  {% for imageData in images reversed %} {% assign image = imageData.image %}
+  <entry>
+    <title type="html">{{ image }}</title>
+    <link
+      href="{{ metadata.url }}/#inspo-{{ image }}"
+      rel="alternate"
+      type="text/html"
+      title="{{image}}"
+    />
+    <published>{{ 'now' | date: '%Y-%m-%d %H:%M' }}</published>
+    <updated>{{ 'now' | date: '%Y-%m-%d %H:%M' }}</updated>
+    <id>image</id>
+    <content type="html">
+      <![CDATA[<figure><a href="{{ metadata.url }}/#inspo-{{ image }}"><img src="{{ metadata.url }}/#inspo-{{image}}.png" alt="" /></a></figure> ]]>
+    </content>
+    <author>
+      <name>{{ metadata.author.name }}</name>
+      <email>{{ metadata.author.email }}</email>
+    </author>
+  </entry>
+  {% endfor %}
+</feed>
