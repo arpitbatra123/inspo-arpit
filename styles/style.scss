@@ -13,6 +13,12 @@ html {
   box-sizing: inherit;
 }
 
+@mixin dark {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}
+
 .grid {
   list-style: none;
   .item {
