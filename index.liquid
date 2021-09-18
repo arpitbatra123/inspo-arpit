@@ -35,9 +35,8 @@
   <body>
     <main class="container">
       <ul class="grid">
-        {% for imageData in images reversed %} 
-        {% assign image = imageData.image %}
-        {% assign backgroundColor = imageData.background %}
+        {% for imageData in images reversed %} {% assign image = imageData.image %} {% assign backgroundColor =
+        imageData.background %}
         <li class="item" style="background-color: {{ backgroundColor }};">
           <!-- Empty image alts until i can find a better way to caption them -->
           <a href="./inspo/{{ image }}.png" data-fancybox="inspo">
@@ -53,6 +52,19 @@
         <li></li>
       </ul>
       <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+      <ul class="links">
+        <li class="rss">
+          <a rel="alternate" type="application/rss+xml" href="https://inspo-arpit.vercel.app/feed.xml" title="RSS Feed"
+            >RSS Feed</a
+          >
+        </li>
+        <li class="github">
+          <a rel="me" href="https://github.com/arpitbatra123/inspo-arpit" title="Fork on Github">Github</a>
+        </li>
+        <li class="link">
+          <a rel="me" href="https://twitter.com/arpitbatra123" title="@arpitbatra123 on Twitter">Twitter</a>
+        </li>
+      </ul>
     </main>
   </body>
 </html>
