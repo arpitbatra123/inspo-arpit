@@ -1,3 +1,4 @@
+// Run locally: node makeWebP.js
 const fs = require('fs');
 const path = require('path');
 const CWebp = require('cwebp').CWebp;
