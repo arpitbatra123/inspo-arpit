@@ -5,6 +5,7 @@
   "dependencies": {
     "@11ty/eleventy": "^0.12.1",
     "concurrently": "^6.2.1",
+    "cwebp": "^2.0.5",
     "sass": "^1.41.1"
   },
   "devDependencies": {},
