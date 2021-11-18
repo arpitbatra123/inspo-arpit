@@ -37,7 +37,7 @@
     />
     <published>{{ 'now' | date: '%Y-%m-%d %H:%M' }}</published>
     <updated>{{ 'now' | date: '%Y-%m-%d %H:%M' }}</updated>
-    <id>image</id>
+    <id>{{ image }}</id>
     <content type="html">
       <![CDATA[<figure><a href="{{ metadata.url }}/#inspo-{{ image }}"><img src="{{ metadata.url }}/#inspo-{{image}}.png" alt="" /></a></figure> ]]>
     </content>
