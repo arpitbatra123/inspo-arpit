@@ -9,7 +9,7 @@ fs.readdir(path.resolve('inspo'), (_err, files) => {
 
     const webPFile = `inspo/webp/${fileName}.webp`;
 
-    if (!fs.existsSync(webPFile)) {
+    if (fileName !== 'webp' && !fs.existsSync(webPFile)) {
       const encoder = new CWebp(path.resolve('inspo', file));
       encoder.quality(90);
       encoder.write(webPFile, function (err) {
