@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
-    "@11ty/eleventy": "^0.12.1",
+    "@11ty/eleventy": "^1.0.2",
     "colorthief": "^2.3.2",
     "concurrently": "^6.2.1",
     "cwebp": "^2.0.5",
