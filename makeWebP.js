@@ -10,8 +10,7 @@ fs.readdir(path.resolve('inspo'), (_err, files) => {
 
     const webPFile = `inspo/webp/${fileName}.webp`;
 
-    // TODO: Fix, This is not preocessing new files
-    if (fileName !== 'webp' && !fs.existsSync(webPFile) && isImage(fileName)) {
+    if (fileName !== 'webp' && !fs.existsSync(webPFile)) {
       const encoder = new CWebp(path.resolve('inspo', file));
       encoder.quality(90);
       encoder.write(webPFile, function (err) {
