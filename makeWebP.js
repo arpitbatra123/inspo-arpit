@@ -2,7 +2,6 @@
 const fs = require('fs');
 const path = require('path');
 const CWebp = require('cwebp').CWebp;
-const isImage = require('is-image');
 
 fs.readdir(path.resolve('inspo'), (_err, files) => {
   files.forEach((file) => {
