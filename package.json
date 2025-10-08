@@ -5,19 +5,22 @@
   "dependencies": {
     "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-plugin-rss": "^2.0.2",
+    "chokidar-cli": "^3.0.0",
     "colorthief": "^2.4.0",
     "concurrently": "^9.0.1",
     "cwebp": "^3.1.0",
     "sass": "^1.79.4"
   },
   "scripts": {
-    "build": "eleventy && npm run sass",
-    "serve": "npm run clean && concurrently 'eleventy --serve' 'npm run sass:watch'",
+    "build": "eleventy && npm run sass && npm run copy:js",
+    "serve": "npm run clean && concurrently 'eleventy --serve' 'npm run sass:watch' 'npm run copy:js:watch'",
     "sass": "sass styles:_site/styles --no-source-map --style=compressed --update",
     "sass:watch": "npm run sass && npm run sass -- --watch",
     "clean": "rm -rf _site",
     "format": "npx prettier --write .",
-    "order": "bash order.sh inspo"
+    "order": "bash order.sh inspo",
+    "copy:js": "cp -r js _site/",
+    "copy:js:watch": "chokidar 'js/**/*' -c 'cp -r js _site/' --initial"
   },
   "keywords": [],
   "author": "",

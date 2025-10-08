@@ -1,0 +1,174 @@
+/**
+ * Minimal Lightbox Styles
+ * 
+ * Created by Cursor AI Assistant
+ * Date: October 8, 2025
+ * For: Arpit Batra's Inspiration Gallery
+ */
+
+// Minimal Lightbox Styles
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  
+  &.active {
+    display: flex;
+    opacity: 1;
+  }
+  
+  &__container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  &__image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+    
+    .lightbox.active & {
+      transform: scale(1);
+    }
+  }
+  
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    transition: background 0.2s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    &::before {
+      content: '×';
+    }
+  }
+  
+  &__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    transition: background 0.2s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    
+    &--prev {
+      left: 20px;
+      
+      &::before {
+        content: '‹';
+      }
+    }
+    
+    &--next {
+      right: 20px;
+      
+      &::before {
+        content: '›';
+      }
+    }
+  }
+  
+  &__counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    backdrop-filter: blur(10px);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .lightbox {
+    &__nav {
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+      
+      &--prev {
+        left: 10px;
+      }
+      
+      &--next {
+        right: 10px;
+      }
+    }
+    
+    &__close {
+      top: 10px;
+      right: 10px;
+      width: 35px;
+      height: 35px;
+      font-size: 20px;
+    }
+    
+    &__counter {
+      bottom: 10px;
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .lightbox {
+    background: rgba(0, 0, 0, 0.98);
+  }
+}

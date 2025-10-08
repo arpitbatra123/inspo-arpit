@@ -4,9 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inspo(ration) by Arpit Batra</title>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
     <link rel="stylesheet" href="./styles/style.css" />
 
     <!-- Primary Meta Tags -->
@@ -39,7 +36,7 @@
         imageData.background %}
         <li class="item" style="background-color: {{ backgroundColor }};">
           <!-- Empty image alts until i can find a better way to caption them -->
-          <a href="./inspo/{{ image }}.png" data-fancybox="inspo">
+          <a href="./inspo/{{ image }}.png" class="lightbox-trigger">
             <picture>
               <source srcset="./inspo/webp/{{ image }}.webp" type="image/webp" />
               <source srcset="./inspo/{{ image }}.png" type="image/png" />
@@ -51,7 +48,7 @@
         <!-- https://css-tricks.com/adaptive-photo-layout-with-flexbox/ -->
         <li></li>
       </ul>
-      <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+      <script src="./js/lightbox.js"></script>
       <ul class="links">
         <li class="rss">
           <a rel="alternate" type="application/rss+xml" href="https://inspo-arpit.vercel.app/feed.xml" title="RSS Feed"
