@@ -1,50 +1,56 @@
----json
-{
-  "permalink": "feed.xml",
-  "eleventyExcludeFromCollections": true,
-  "metadata": {
-    "title": "inspo by @arpitbatra123",
-    "subtitle": "a collection of inspirational screenshots",
-    "url": "https://inspo-arpit.vercel.app",
-    "feedUrl": "https://inspo-arpit.vercel.app/feed.xml",
-    "author": {
-      "name": "arpit batra",
-      "email": "arpitbatra123@gmail.com"
-    }
-  }
-}
 ---
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <link href="{{ metadata.feedUrl }}" rel="self" type="application/atom+xml" />
-  <link href="{{ metadata.url }}" rel="alternate" type="text/html" />
-  <updated>{{ 'now' | date: '%Y-%m-%d %H:%M' }}</updated>
-  <id>{{ metadata.url }}</id>
-  <title type="html">{{ metadata.title }}</title>
-  <subtitle>{{ metadata.subtitle }}</subtitle>
-  <author>
-    <name>{{ metadata.author.name }}</name>
-    <email>{{ metadata.author.email }}</email>
-  </author>
-  {% for imageData in images reversed %} {% assign image = imageData.image %}
-  <entry>
-    <title type="html">{{ image }}</title>
-    <link
-      href="{{ metadata.url }}/#inspo-{{ image }}"
-      rel="alternate"
-      type="text/html"
-      title="{{image}}"
-    />
-    <published>{{ 'now' | date: '%Y-%m-%d %H:%M' }}</published>
-    <updated>{{ 'now' | date: '%Y-%m-%d %H:%M' }}</updated>
-    <id>{{ image }}</id>
-    <content type="html">
-      <![CDATA[<figure><a href="{{ metadata.url }}/#inspo-{{ image }}"><img src="{{ metadata.url }}/#inspo-{{image}}.png" alt="" /></a></figure> ]]>
-    </content>
-    <author>
-      <name>{{ metadata.author.name }}</name>
-      <email>{{ metadata.author.email }}</email>
-    </author>
-  </entry>
-  {% endfor %}
-</feed>
+# RSS Feed for Inspiration Gallery
+# Fixed and improved by Cursor AI Assistant
+# Date: October 8, 2025
+# For: Arpit Batra's Inspiration Gallery
+permalink: feed.xml
+eleventyExcludeFromCollections: true
+---<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" 
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
+  <channel>
+    <title>Inspo by @arpitbatra123</title>
+    <atom:link href="https://inspo-arpit.vercel.app/feed.xml" rel="self" type="application/rss+xml" />
+    <link>https://inspo-arpit.vercel.app</link>
+    <description>A collection of inspirational screenshots by Arpit Batra</description>
+    <lastBuildDate>{{ 'now' | date: '%a, %d %b %Y %H:%M:%S %z' }}</lastBuildDate>
+    <language>en-US</language>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>1</sy:updateFrequency>
+    <generator>Eleventy + RSS Plugin</generator>
+    
+    {% for imageData in images reversed %}
+      {% assign image = imageData.image %}
+      {% assign daysAgo = forloop.index %}
+      <item>
+        <title>Inspiration {{ image }}</title>
+        <link>https://inspo-arpit.vercel.app/#inspo-{{ image }}</link>
+        <pubDate>{{ 'now' | date: '%s' | minus: 86400 | times: daysAgo | date: '%a, %d %b %Y %H:%M:%S %z' }}</pubDate>
+        <dc:creator><![CDATA[arpit batra]]></dc:creator>
+        <guid isPermaLink="false">https://inspo-arpit.vercel.app/#inspo-{{ image }}</guid>
+        <description><![CDATA[
+          <p>Inspirational screenshot #{{ image }} from the collection.</p>
+          <p><a href="https://inspo-arpit.vercel.app/#inspo-{{ image }}">View in lightbox</a></p>
+        ]]></description>
+        <content:encoded><![CDATA[
+          <figure style="margin: 0; padding: 0;">
+            <a href="https://inspo-arpit.vercel.app/#inspo-{{ image }}">
+              <img src="https://inspo-arpit.vercel.app/inspo/{{ image }}.png" 
+                   alt="Inspiration {{ image }}" 
+                   style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+            </a>
+            <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">
+              Inspiration {{ image }} - Click to view in lightbox
+            </figcaption>
+          </figure>
+          <p><strong>View in lightbox:</strong> <a href="https://inspo-arpit.vercel.app/#inspo-{{ image }}">https://inspo-arpit.vercel.app/#inspo-{{ image }}</a></p>
+        ]]></content:encoded>
+      </item>
+    {% endfor %}
+  </channel>
+</rss>
