@@ -18,24 +18,29 @@ eleventyExcludeFromCollections: true
     <atom:link href="https://inspo-arpit.vercel.app/feed.xml" rel="self" type="application/rss+xml" />
     <link>https://inspo-arpit.vercel.app</link>
     <description>A collection of inspirational screenshots by Arpit Batra</description>
-    <lastBuildDate>{{ 'now' | date: '%a, %d %b %Y %H:%M:%S %z' }}</lastBuildDate>
+    <lastBuildDate>{{ '2025-01-01' | date: '%a, %d %b %Y %H:%M:%S %z' }}</lastBuildDate>
     <language>en-US</language>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
     <generator>Eleventy + RSS Plugin</generator>
     
-    {% for imageData in images reversed %}
+    {% for imageData in images %}
       {% assign image = imageData.image %}
-      {% assign daysAgo = forloop.index %}
+      {% assign imageNumber = image | plus: 0 %}
       <item>
         <title>Inspiration {{ image }}</title>
         <link>https://inspo-arpit.vercel.app/#inspo-{{ image }}</link>
-        <pubDate>{{ 'now' | date: '%s' | minus: 86400 | times: daysAgo | date: '%a, %d %b %Y %H:%M:%S %z' }}</pubDate>
+        {% if imageNumber == 101 %}<pubDate>Thu, 01 Jan 2025 12:00:00 +0000</pubDate>
+        {% elsif imageNumber == 100 %}<pubDate>Wed, 31 Dec 2024 12:00:00 +0000</pubDate>
+        {% elsif imageNumber == 99 %}<pubDate>Tue, 30 Dec 2024 12:00:00 +0000</pubDate>
+        {% elsif imageNumber == 98 %}<pubDate>Mon, 29 Dec 2024 12:00:00 +0000</pubDate>
+        {% elsif imageNumber == 97 %}<pubDate>Sun, 28 Dec 2024 12:00:00 +0000</pubDate>
+        {% else %}<pubDate>Sat, 27 Dec 2024 12:00:00 +0000</pubDate>{% endif %}
         <dc:creator><![CDATA[arpit batra]]></dc:creator>
         <guid isPermaLink="false">https://inspo-arpit.vercel.app/#inspo-{{ image }}</guid>
         <description><![CDATA[
           <p>Inspirational screenshot #{{ image }} from the collection.</p>
-          <p><a href="https://inspo-arpit.vercel.app/#inspo-{{ image }}">View in lightbox</a></p>
+          <p><a href="https://inspo-arpit.vercel.app/#inspo-{{ image }}">view</a></p>
         ]]></description>
         <content:encoded><![CDATA[
           <figure style="margin: 0; padding: 0;">
@@ -45,10 +50,10 @@ eleventyExcludeFromCollections: true
                    style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
             </a>
             <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">
-              Inspiration {{ image }} - Click to view in lightbox
+              Inspiration {{ image }} - Click to view
             </figcaption>
           </figure>
-          <p><strong>View in lightbox:</strong> <a href="https://inspo-arpit.vercel.app/#inspo-{{ image }}">https://inspo-arpit.vercel.app/#inspo-{{ image }}</a></p>
+          <p><strong>view:</strong> <a href="https://inspo-arpit.vercel.app/#inspo-{{ image }}">https://inspo-arpit.vercel.app/#inspo-{{ image }}</a></p>
         ]]></content:encoded>
       </item>
     {% endfor %}

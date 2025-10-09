@@ -11,9 +11,22 @@ module.exports = async function getImages() {
     return IMAGE_EXTENSIONS.includes(extension);
   });
 
-  files = files.map((file) => {
-    return { image: file.split('.')[0], background: background[file] };
-  });
+  // Get file stats for creation dates
+  const filesWithStats = await Promise.all(
+    files.map(async (file) => {
+      const filePath = path.resolve('inspo', file);
+      const stats = await fs.promises.stat(filePath);
+      return {
+        image: file.split('.')[0],
+        background: background[file],
+        createdDate: stats.birthtime,
+        modifiedDate: stats.mtime
+      };
+    })
+  );
 
-  return files;
+  // Sort by creation date (newest first)
+  filesWithStats.sort((a, b) => b.createdDate - a.createdDate);
+
+  return filesWithStats;
 };
