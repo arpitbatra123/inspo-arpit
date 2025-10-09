@@ -35,6 +35,7 @@ class MinimalLightbox {
       <div class="lightbox" id="lightbox">
         <div class="lightbox__container">
           <button class="lightbox__close" aria-label="Close lightbox"></button>
+          <div class="lightbox__loading"></div>
           <img class="lightbox__image" alt="" />
           <button class="lightbox__nav lightbox__nav--prev" aria-label="Previous image"></button>
           <button class="lightbox__nav lightbox__nav--next" aria-label="Next image"></button>
@@ -48,6 +49,7 @@ class MinimalLightbox {
     // Cache elements
     this.lightbox = document.getElementById('lightbox');
     this.image = this.lightbox.querySelector('.lightbox__image');
+    this.loading = this.lightbox.querySelector('.lightbox__loading');
     this.closeBtn = this.lightbox.querySelector('.lightbox__close');
     this.prevBtn = this.lightbox.querySelector('.lightbox__nav--prev');
     this.nextBtn = this.lightbox.querySelector('.lightbox__nav--next');
@@ -176,14 +178,11 @@ class MinimalLightbox {
     
     const item = this.gallery[index];
     
-    // Update image
-    this.image.src = item.src;
-    this.image.alt = item.alt;
+    // Show loading state
+    this.showLoading();
     
-    // Update counter
+    // Update counter and navigation first (these are fast)
     this.counter.textContent = `${index + 1} / ${this.gallery.length}`;
-    
-    // Update navigation buttons
     this.prevBtn.disabled = index === 0;
     this.nextBtn.disabled = index === this.gallery.length - 1;
     
@@ -197,6 +196,9 @@ class MinimalLightbox {
     if (window.location.hash !== `#${newHash}`) {
       history.pushState(null, null, `#${newHash}`);
     }
+    
+    // Load image with loading state
+    this.loadImage(item);
   }
   
   close() {
@@ -204,10 +206,48 @@ class MinimalLightbox {
     this.lightbox.classList.remove('active');
     document.body.style.overflow = '';
     
+    // Reset image state
+    this.image.classList.remove('loaded');
+    this.image.src = '';
+    
     // Clear hash
     if (window.location.hash) {
       history.pushState(null, null, window.location.pathname);
     }
+  }
+  
+  showLoading() {
+    this.loading.classList.remove('hidden');
+    this.image.classList.remove('loaded');
+  }
+  
+  hideLoading() {
+    this.loading.classList.add('hidden');
+  }
+  
+  loadImage(item) {
+    // Create new image to preload
+    const img = new Image();
+    
+    img.onload = () => {
+      // Image loaded successfully
+      this.image.src = item.src;
+      this.image.alt = item.alt;
+      
+      // Hide loading and show image
+      this.hideLoading();
+      this.image.classList.add('loaded');
+    };
+    
+    img.onerror = () => {
+      // Image failed to load
+      this.hideLoading();
+      this.image.alt = 'Failed to load image';
+      this.image.classList.add('loaded');
+    };
+    
+    // Start loading the image
+    img.src = item.src;
   }
   
   prev() {

@@ -42,9 +42,32 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     transform: scale(0.8);
     transition: transform 0.3s ease;
+    opacity: 0;
+    
+    &.loaded {
+      opacity: 1;
+    }
     
     .lightbox.active & {
       transform: scale(1);
+    }
+  }
+  
+  &__loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 1;
+    
+    &.hidden {
+      display: none;
     }
   }
   
@@ -164,6 +187,12 @@
       padding: 6px 12px;
     }
   }
+}
+
+// Loading animation
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 // Dark mode support
