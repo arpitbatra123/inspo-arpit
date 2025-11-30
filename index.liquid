@@ -18,36 +18,29 @@
     <meta property="og:description" content="A collection of inspirational photos by Arpit Batra" />
     <meta property="og:image" content="https://inspo-arpit.vercel.app/assets/images/og-loc-inspo.png" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://inspo-arpit.vercel.app/" />
-    <meta property="twitter:title" content="Inspo(ration) by Arpit Batra" />
-    <meta property="twitter:description" content="A collection of inspirational photos by Arpit Batra" />
-    <meta property="twitter:image" content="https://inspo-arpit.vercel.app/assets/images/og-loc-inspo.png" />
-    <meta property="twitter:creator" content="@arpitbatra123" />
+    <!-- Removed Twitter meta; add Instagram profile link in footer -->
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <main class="container">
-      <ul class="grid">
-        {% for imageData in images %} {% assign image = imageData.image %} {% assign backgroundColor =
-        imageData.background %}
-        <li class="item" style="background-color: {{ backgroundColor }};">
-          <!-- Empty image alts until i can find a better way to caption them -->
-          <a href="./inspo/{{ image }}.png" class="lightbox-trigger">
-            <picture>
-              <source srcset="./inspo/webp/{{ image }}.webp" type="image/webp" />
-              <source srcset="./inspo/{{ image }}.png" type="image/png" />
-              <img src="./inspo/{{ image }}.png" loading="lazy" alt="" />
-            </picture>
-          </a>
-        </li>
+      <!-- Masonry layout (CSS columns). Previously flexbox grid: https://css-tricks.com/adaptive-photo-layout-with-flexbox/ -->
+      <div class="masonry-grid">
+        {% for imageData in images %}
+          {% assign image = imageData.image %}
+          {% assign backgroundColor = imageData.background %}
+          <figure class="masonry-item" style="background-color: {{ backgroundColor }};">
+            <a href="./inspo/{{ image }}.png" class="lightbox-trigger" data-bg="{{ backgroundColor }}">
+              <picture>
+                <source srcset="./inspo/webp/{{ image }}.webp" type="image/webp" />
+                <source srcset="./inspo/{{ image }}.png" type="image/png" />
+                <img src="./inspo/{{ image }}.png" loading="lazy" alt="" />
+              </picture>
+            </a>
+          </figure>
         {% endfor %}
-        <!-- https://css-tricks.com/adaptive-photo-layout-with-flexbox/ -->
-        <li></li>
-      </ul>
+      </div>
       <script src="./js/lightbox.js"></script>
       <ul class="links">
         <li class="rss">
@@ -59,7 +52,7 @@
           <a rel="me" href="https://github.com/arpitbatra123/inspo-arpit" title="Fork on Github">Github</a>
         </li>
         <li class="link">
-          <a rel="me" href="https://twitter.com/arpitbatra123" title="@arpitbatra123 on Twitter">Twitter</a>
+          <a rel="me" href="https://www.instagram.com/arpitbatra123" title="@arpitbatra123 on Instagram">Instagram</a>
         </li>
       </ul>
     </main>

@@ -143,10 +143,12 @@ class MinimalLightbox {
     this.gallery = Array.from(triggers).map(trigger => {
       const href = trigger.getAttribute('href');
       const img = trigger.querySelector('img');
+      const bg = trigger.getAttribute('data-bg') || getComputedStyle(trigger.parentElement).backgroundColor || '';
       return {
         src: href,
         alt: img ? img.getAttribute('alt') : '',
-        element: trigger
+        element: trigger,
+        bgColor: bg
       };
     });
   }
@@ -186,6 +188,14 @@ class MinimalLightbox {
     this.prevBtn.disabled = index === 0;
     this.nextBtn.disabled = index === this.gallery.length - 1;
     
+    // Apply background color for this image if available
+    if (item.bgColor) {
+      // Use a layered background to keep controls legible
+      this.lightbox.style.background = `${item.bgColor}`;
+    } else {
+      this.lightbox.style.background = 'rgba(0,0,0,0.95)';
+    }
+
     // Show lightbox
     this.lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';

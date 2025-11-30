@@ -12,8 +12,8 @@
     "sass": "^1.79.4"
   },
   "scripts": {
-    "build": "eleventy && npm run sass && npm run copy:js",
-    "serve": "npm run clean && concurrently 'eleventy --serve' 'npm run sass:watch' 'npm run copy:js:watch'",
+    "build": "node backgrounds.js && eleventy && npm run sass && npm run copy:js",
+    "serve": "npm run clean && node backgrounds.js && concurrently 'eleventy --serve' 'npm run sass:watch' 'npm run copy:js:watch'",
     "sass": "sass styles:_site/styles --no-source-map --style=compressed --update",
     "sass:watch": "npm run sass && npm run sass -- --watch",
     "clean": "rm -rf _site",
