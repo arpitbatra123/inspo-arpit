@@ -23,78 +23,51 @@ html {
   }
 }
 
-.grid {
-  list-style: none;
-  .item {
-    outline: 2px solid #fff;
-    background-color: thistle;
-    @include dark {
-      outline: 2px solid black;
-    }
-  }
-}
-
-// Most of the css here is from - https://css-tricks.com/adaptive-photo-layout-with-flexbox/
-
-// BASIC
-
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.item {
-  height: 40vh;
-  flex-grow: 1;
-}
-
-.item:last-child {
-  // There's no science in using "10" here. In all my testing, this delivered the best results.
-  flex-grow: 10;
-}
 
 img {
   max-height: 100%;
   min-width: 100%;
   object-fit: cover;
   vertical-align: bottom;
-}
-
-// ADVANCED
-
-// Portrait
-
-@media (max-aspect-ratio: 1/1) {
-  .item {
-    height: 30vh;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-sizing: border-box;
+  @include dark {
+    border-color: rgba(0,0,0,0.4);
   }
 }
 
-// Short screens
+// Masonry layout using CSS columns
+.masonry-grid {
+  column-count: 2;
+  column-gap: 0;
+}
 
-@media (max-height: 480px) {
-  .item {
-    height: 80vh;
+.masonry-item {
+  break-inside: avoid;
+  margin: 0;
+}
+
+.masonry-item picture,
+.masonry-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  @include dark {
+    border-color: rgba(0,0,0,0.4);
   }
 }
 
-// Smaller screens in portrait
-
-@media (max-aspect-ratio: 1/1) and (max-width: 480px) {
-  .grid {
-    flex-direction: row;
-  }
-
-  .item {
-    height: auto;
-    width: 100%;
-  }
-  img {
-    width: 100%;
-    max-height: 75vh;
-    min-width: 0;
-  }
+@media (max-width: 900px) {
+  .masonry-grid { column-count: 1; }
 }
+
+@media (max-width: 600px) {
+  .masonry-grid { column-count: 1; }
+}
+
+// (Removed legacy flexbox grid styles: .grid/.item) Masonry is now the only layout.
 
 .links {
   position: fixed;
