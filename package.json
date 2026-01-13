@@ -6,7 +6,7 @@
     "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-plugin-rss": "^2.0.2",
     "chokidar-cli": "^3.0.0",
-    "colorthief": "^2.4.0",
+    "colorthief": "^2.6.0",
     "concurrently": "^9.0.1",
     "cwebp": "^3.1.0",
     "sass": "^1.79.4"
